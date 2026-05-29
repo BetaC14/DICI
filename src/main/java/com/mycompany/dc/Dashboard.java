@@ -81,7 +81,7 @@ public class Dashboard extends javax.swing.JFrame {
         jButton5.setText("Datos Institucionales");
         jButton5.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 15, 1, 1, new java.awt.Color(0, 0, 0)));
         jButton5.setBorderPainted(false);
-        jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButton5.setMaximumSize(new java.awt.Dimension(340, 50));
         jButton5.setPreferredSize(new java.awt.Dimension(150, 150));
@@ -99,7 +99,7 @@ public class Dashboard extends javax.swing.JFrame {
         jButton6.setText("Matrícula Estudiantil");
         jButton6.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 15, 1, 1, new java.awt.Color(0, 0, 0)));
         jButton6.setBorderPainted(false);
-        jButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButton6.setMaximumSize(new java.awt.Dimension(340, 50));
         jPanel2.add(jButton6);
@@ -111,7 +111,7 @@ public class Dashboard extends javax.swing.JFrame {
         jButton7.setText("Salud Y Bienes");
         jButton7.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 15, 1, 1, new java.awt.Color(0, 0, 0)));
         jButton7.setBorderPainted(false);
-        jButton7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton7.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButton7.setMaximumSize(new java.awt.Dimension(340, 50));
         jPanel2.add(jButton7);
@@ -123,7 +123,7 @@ public class Dashboard extends javax.swing.JFrame {
         jButton8.setText("Nómina RAC");
         jButton8.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 15, 1, 1, new java.awt.Color(0, 0, 0)));
         jButton8.setBorderPainted(false);
-        jButton8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton8.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton8.setHideActionText(true);
         jButton8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButton8.setMaximumSize(new java.awt.Dimension(340, 50));
@@ -138,7 +138,7 @@ public class Dashboard extends javax.swing.JFrame {
         jButton1.setText("Crear mi plantilla");
         jButton1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 15, 1, 1, new java.awt.Color(0, 0, 0)));
         jButton1.setBorderPainted(false);
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 
         jButton3.setBackground(new java.awt.Color(21, 101, 192));
@@ -148,7 +148,7 @@ public class Dashboard extends javax.swing.JFrame {
         jButton3.setText("Eliminar Plantilla");
         jButton3.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 15, 1, 1, new java.awt.Color(0, 0, 0)));
         jButton3.setBorderPainted(false);
-        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 
         jButton4.setBackground(new java.awt.Color(21, 101, 192));
@@ -158,7 +158,7 @@ public class Dashboard extends javax.swing.JFrame {
         jButton4.setText("Editar Plantilla");
         jButton4.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 15, 1, 1, new java.awt.Color(0, 0, 0)));
         jButton4.setBorderPainted(false);
-        jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 
         jButton9.setBorder(null);
@@ -193,17 +193,17 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(58, 58, 58)
-                .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
-                .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE))
         );
 
         header.setBackground(new java.awt.Color(21, 101, 192));
 
         Info.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Info.setText(".");
+        Info.setText("aQUI VA lA InFORMACION");
 
         Welcome.setText("Bienvenido a DICI");
 
@@ -227,32 +227,28 @@ public class Dashboard extends javax.swing.JFrame {
             headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(headerLayout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addComponent(Welcome, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addComponent(Welcome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(421, 421, 421)
                 .addComponent(BtImport, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(9, 9, 9)
                 .addComponent(BtExport, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
-            .addGroup(headerLayout.createSequentialGroup()
-                .addGap(137, 137, 137)
-                .addComponent(Info, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(8, 8, 8))
+            .addComponent(Info, javax.swing.GroupLayout.PREFERRED_SIZE, 754, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         headerLayout.setVerticalGroup(
             headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
+            .addGroup(headerLayout.createSequentialGroup()
                 .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerLayout.createSequentialGroup()
-                        .addComponent(Welcome)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Info)
-                        .addGap(12, 12, 12))
                     .addGroup(headerLayout.createSequentialGroup()
-                        .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(BtExport)
-                            .addComponent(BtImport))
-                        .addGap(14, 14, 14))))
+                        .addGap(10, 10, 10)
+                        .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(BtImport, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BtExport, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(headerLayout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(Welcome)))
+                .addGap(4, 4, 4)
+                .addComponent(Info, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -278,7 +274,7 @@ public class Dashboard extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 576, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jScrollPane2)
         );
 
         javax.swing.GroupLayout fondoLayout = new javax.swing.GroupLayout(fondo);
@@ -293,7 +289,7 @@ public class Dashboard extends javax.swing.JFrame {
         );
         fondoLayout.setVerticalGroup(
             fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE)
             .addGroup(fondoLayout.createSequentialGroup()
                 .addComponent(header, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
@@ -323,15 +319,23 @@ public class Dashboard extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        Modelo.ModeloExcel ModeloEX=new Modelo.ModeloExcel();
-        Dashboard VistaEX=new Dashboard();
-        Controlador.ControladorExcel ControladorExcel=new Controlador.ControladorExcel(VistaEX, ModeloEX);
-        FlatMacLightLaf.setup();
-        
+        // 1. Lo PRIMERO que hace el programa es preparar el tema visual
+        com.formdev.flatlaf.themes.FlatMacLightLaf.setup();
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Dashboard().setVisible(true);
+                // 2. Modelo de Excel de Ana
+                Modelo.ModeloExcel ModeloEX = new Modelo.ModeloExcel();
+
+                // 3. Creamos UNA SOLA instancia de la ventana (Ya tendrá el estilo Mac)
+                Dashboard VistaEX = new Dashboard();
+
+                // 4. Se la pasamos al controlador para que vincule la lógica de POI
+                Controlador.ControladorExcel ControladorExcel = new Controlador.ControladorExcel(VistaEX, ModeloEX);
+
+                // 5. Hacemos visible esa ÚNICA ventana controlada
+                VistaEX.setVisible(true);
             }
         });
     }
