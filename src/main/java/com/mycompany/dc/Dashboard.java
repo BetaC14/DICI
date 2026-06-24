@@ -25,7 +25,7 @@ public class Dashboard extends javax.swing.JFrame {
     }
     private void InitStyles() {
     
-        Info.putClientProperty( "FlatLaf.style", "fuente: 8% $light.font" );
+        Info.putClientProperty( "FlatLaf.style", "font: 8% $light.font" );
         Info.setForeground(Color.white);
         Welcome.putClientProperty( "FlatLaf.style", "font: 200% $bold.font" );
         Welcome.setForeground(Color.white);
