@@ -109,7 +109,20 @@ public class baseInicial {
                 INSERT OR IGNORE INTO usuarios (id_usuario, username, password) 
                 VALUES (1, 'director', ?);
             """;
-            
+             
+String sqlPlantillasIniciales = """
+    INSERT OR IGNORE INTO plantillas (id_plantilla, nombre_plantilla, descripcion) 
+    VALUES 
+    (1, 'DATOS_INST', 'Datos Institucionales'),
+    (2, 'MATRICULA', 'Matrícula Estudiantil'),
+    (3, 'SALUD', 'Salud y Bienes'),
+    (4, 'NOMINA', 'Nómina RAC');
+""";
+
+try (Statement stmtPlantillas = con.createStatement()) {
+    stmtPlantillas.execute(sqlPlantillasIniciales);
+    System.out.println("Secciones de DICI vinculadas a la base de datos.");
+}
             try (PreparedStatement pstmt = con.prepareStatement(sqlUsuario)) {
                 pstmt.setString(1, claveEncriptada);
                 pstmt.executeUpdate();

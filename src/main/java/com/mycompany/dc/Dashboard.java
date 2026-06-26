@@ -9,6 +9,10 @@ import com.formdev.flatlaf.intellijthemes.FlatGrayIJTheme;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import java.awt.Color;
 import javax.swing.UIManager;
+import javax.swing.JFileChooser;
+import Modelo.ConexionSQL;
+import java.sql.Connection;
+
 
 /**
  *
@@ -233,6 +237,11 @@ public class Dashboard extends javax.swing.JFrame {
         BtExport.setText("Exportar");
         BtExport.setBorder(null);
         BtExport.setBorderPainted(false);
+        BtExport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtExportActionPerformed(evt);
+            }
+        });
 
         BtImport.setBackground(new java.awt.Color(45, 85, 154));
         BtImport.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
@@ -240,6 +249,11 @@ public class Dashboard extends javax.swing.JFrame {
         BtImport.setText("Importar");
         BtImport.setBorder(null);
         BtImport.setBorderPainted(false);
+        BtImport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtImportActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout headerLayout = new javax.swing.GroupLayout(header);
         header.setLayout(headerLayout);
@@ -251,7 +265,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGap(421, 421, 421)
                 .addComponent(BtImport, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(9, 9, 9)
-                .addComponent(BtExport, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BtExport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(8, 8, 8))
             .addComponent(Info, javax.swing.GroupLayout.PREFERRED_SIZE, 754, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
@@ -284,6 +298,7 @@ public class Dashboard extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        DatosExel.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jScrollPane2.setViewportView(DatosExel);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -331,13 +346,139 @@ public class Dashboard extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+   
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void BtImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtImportActionPerformed
+     
+    // RESPUESTA AL BOTÓN DE IMPORTAR
+        // TIENE UN TEMPORIZADOR PARA ACTIVAR LA FUNCION DE LA IMPORTACION GUARDA LO IMPORTADA EN UNA TABLAEXCEL 
+        javax.swing.Timer timer = new javax.swing.Timer(1000, new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+               
+                guardarDatosEnSQLite();
+            }
+        });
+        timer.setRepeats(false); 
+        timer.start();
+    }                                        
+
+    // MÉTODO QUE VACÍA LA BASE DE DATOS Y RESPALDA LA TABLA ACTUAL
+   
+    private void guardarDatosEnSQLite() {
+    // 1. Validar si la tabla tiene información cargada
+    if (DatosExel == null || DatosExel.getRowCount() == 0) {
+        System.out.println("Guardado automático omitido: La tabla DatosExel está vacía.");
+        return;
+    }
+
+    java.sql.Connection con = Modelo.ConexionSQL.getConexion();
+    
+    try {
+        // Desactivamos el autocommit para procesar en lote de forma segura
+        con.setAutoCommit(false);
+        
+        // 2. OBTENER LOS NOMBRES DE LAS COLUMNAS DE LA JTABLE
+        int totalColumnas = DatosExel.getColumnCount();
+        int totalFilas = DatosExel.getRowCount();
+        String[] nombresColumnas = new String[totalColumnas];
+        
+        for (int col = 0; col < totalColumnas; col++) {
+           
+            String nombreLimpio = DatosExel.getColumnName(col)
+                                    .trim()
+                                    .replaceAll("[^a-zA-Z0-9_]", "_");
+            
+            // Si por algún motivo el encabezado está vacío, le asignamos un nombre genérico
+            if (nombreLimpio.isEmpty()) {
+                nombreLimpio = "columna_" + (col + 1);
+            }
+            nombresColumnas[col] = nombreLimpio;
+        }
+
+        // 3. BORRAR LA TABLA ANTERIOR SI EXISTE 
+        String nombreTablaDinamica = "excel_importado";
+        try (java.sql.Statement stmtDrop = con.createStatement()) {
+            stmtDrop.execute("DROP TABLE IF EXISTS " + nombreTablaDinamica + ";");
+        }
+
+        // Armamos la consulta concatenando los nombres que extrajimos de la JTable
+        StringBuilder sqlCreate = new StringBuilder("CREATE TABLE " + nombreTablaDinamica + " (");
+        sqlCreate.append("id_registro INTEGER PRIMARY KEY AUTOINCREMENT, ");
+        
+        for (int col = 0; col < totalColumnas; col++) {
+            sqlCreate.append(nombresColumnas[col]).append(" TEXT");
+            if (col < totalColumnas - 1) {
+                sqlCreate.append(", ");
+            }
+        }
+        sqlCreate.append(");");
+
+        // Ejecutamos la creación de la nueva tabla estructurada idéntica al Excel
+        try (java.sql.Statement stmtCreate = con.createStatement()) {
+            stmtCreate.execute(sqlCreate.toString());
+        }
+
+        // 5. CONSTRUIR EL 'INSERT' DINÁMICO
+        StringBuilder sqlInsert = new StringBuilder("INSERT INTO " + nombreTablaDinamica + " (");
+        StringBuilder valoresSignos = new StringBuilder();
+        
+        for (int col = 0; col < totalColumnas; col++) {
+            sqlInsert.append(nombresColumnas[col]);
+            valoresSignos.append("?");
+            if (col < totalColumnas - 1) {
+                sqlInsert.append(", ");
+                valoresSignos.append(", ");
+            }
+        }
+        sqlInsert.append(") VALUES (").append(valoresSignos).append(");");
+
+        // 6. INSERTAR LOS DATOS FILA POR FILA
+        try (java.sql.PreparedStatement psInsertar = con.prepareStatement(sqlInsert.toString())) {
+            for (int fila = 0; fila < totalFilas; fila++) {
+                for (int col = 0; col < totalColumnas; col++) {
+                    Object valorCelda = DatosExel.getValueAt(fila, col);
+                    String texto = (valorCelda != null) ? valorCelda.toString() : "";
+                    
+                    psInsertar.setString(col + 1, texto);
+                }
+                psInsertar.addBatch(); // Lo añadimos al lote
+            }
+            psInsertar.executeBatch(); // Guardado masivo veloz
+        }
+
+        // Confirmamos de forma definitiva en el archivo dici_sistema.db
+        con.commit(); 
+
+        // 7. AVISO DE ÉXITO DINÁMICO
+        javax.swing.JOptionPane.showMessageDialog(this,
+            "¡Estructura detectada y guardada con éxito!\n" +
+            "Se creó la tabla '" + nombreTablaDinamica + "' con " + totalColumnas + " columnas y " + totalFilas + " filas.",
+            "DICI - Importador Inteligente",
+            javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
+    } catch (Exception e) {
+        try { con.rollback(); } catch (java.sql.SQLException ex) {}
+        javax.swing.JOptionPane.showMessageDialog(this,
+            "Error al estructurar dinámicamente la base de datos: " + e.getMessage(),
+            "Error de Mapeo Dinámico",
+            javax.swing.JOptionPane.ERROR_MESSAGE);
+        e.printStackTrace();
+    } finally {
+        try { con.setAutoCommit(true); } catch (java.sql.SQLException e) {}
+    }
+
+                                       
+    }//GEN-LAST:event_BtImportActionPerformed
+
+    private void BtExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtExportActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtExportActionPerformed
+
+  
     public static void main(String args[]) {
         // 1. Lo PRIMERO que hace el programa es preparar el tema visual
         com.formdev.flatlaf.themes.FlatMacLightLaf.setup();
